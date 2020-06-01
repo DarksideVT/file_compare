@@ -6,6 +6,7 @@ RIGHTDIR = None
 OUTPUTFILELOCATION = "./"
 QUEUEONENAME = "directory_one.txt"
 QUEUETWONAME = "directory_two.txt"
+DIFFERENCESFILE = "differences.txt"
 
 def output_list(outputList):
     for x in outputList:
@@ -33,6 +34,7 @@ def check_up_counter(inputNumber):
         return False
 
 def create_queue(rootDirectory):
+    global DIFFERENCESFILE
     queue = [None]
     counter = 0
     for root, directories, filenames in os.walk(rootDirectory):
@@ -47,7 +49,7 @@ def create_queue(rootDirectory):
             if check_up_counter(counter) == True:
                 print("There are %d files so far" % counter)
     print("The total number of contents in '%s' is: %d" % (rootDirectory, counter))
-    with open("differences.txt", "a") as outputFile:
+    with open(DIFFERENCESFILE, "a") as outputFile:
         outputFile.write("Total files in %s are: %d\n" % (rootDirectory, counter))
     return queue
 
@@ -57,6 +59,7 @@ def list_diff(list1, list2):
 def run():
     global LEFTDIR
     global RIGHTDIR
+    global DIFFERENCESFILE
     does_output_exists()
     #Comment out LEFTDIR and RIGHTDIR here to use hard coded directories at beginning of script
     LEFTDIR = input("What is the root directory for the left side? ")
@@ -65,6 +68,6 @@ def run():
     write_to_file(queueone, QUEUEONENAME)
     queuetwo = create_queue(RIGHTDIR)
     write_to_file(queuetwo, QUEUETWONAME)
-    write_to_file(list_diff(queueone, queuetwo), "differences.txt")
+    write_to_file(list_diff(queueone, queuetwo), DIFFERENCESFILE)
 
 run()
