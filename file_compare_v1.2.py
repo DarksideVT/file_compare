@@ -58,7 +58,7 @@ def run():
     global LEFTDIR
     global RIGHTDIR
     does_output_exists()
-    #Comment out left and right dir to use hard coded directories from beginning
+    #Comment out LEFTDIR and RIGHTDIR here to use hard coded directories at beginning of script
     LEFTDIR = input("What is the root directory for the left side? ")
     RIGHTDIR = input("What is the root directory for the right side? ")
     queueone = create_queue(LEFTDIR)
